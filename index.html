@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Labo Débat - École Secondaire Bruxelles</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --retro-teal: #127676;
+    --retro-orange: #E4632E;
+    --retro-jaune: #E3A535;
+    --retro-ink: #0D1617;
+    --retro-paper: #F2EFE6;
+    --retro-teal-light: rgba(18,118,118,0.12);
+    --retro-orange-light: rgba(228,99,46,0.10);
+    --retro-jaune-light: rgba(227,165,53,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: url('background.jpg') center center / cover fixed;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--retro-ink);
+    min-height: 100vh;
+    padding: 96px;
+  }
+
+  /* ─── PAGE FRAME ─────────────────────────────── */
+  .page-frame {
+    background: var(--retro-paper);
+    border: 4px solid var(--retro-orange);
+    position: relative;
+    min-height: calc(100vh - 24px);
+    padding: 0 0 48px 0;
+  }
+
+  /* Corner flourishes */
+  .corner-flourish {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    color: var(--retro-teal);
+    opacity: 0.65;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .corner-flourish.top-left    { top: 6px; left: 6px; }
+  .corner-flourish.top-right   { top: 6px; right: 6px; transform: scaleX(-1); }
+  .corner-flourish.bottom-left { bottom: 6px; left: 6px; transform: scaleY(-1); }
+  .corner-flourish.bottom-right{ bottom: 6px; right: 6px; transform: scale(-1); }
+
+  /* ─── HEADER ─────────────────────────────────── */
+  header {
+    background: var(--retro-ink);
+    border-bottom: 4px solid var(--retro-teal);
+    padding: 36px 48px;
+    position: relative;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0; right: 0;
+    height: 4px;
+    background: var(--retro-orange);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  @media (min-width: 768px) {
+    .header-inner { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+  .header-brand h1 {
+    font-family: 'Oswald', Impact, Arial Narrow, sans-serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--retro-paper);
+    line-height: 1;
+  }
+  .header-brand h1 span {
+    color: var(--retro-teal);
+  }
+  .header-brand p {
+    margin-top: 6px;
+    color: var(--retro-jaune);
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .header-nav {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  /* ─── BUTTONS ────────────────────────────────── */
+  .retro-btn-pill {
+    display: inline-flex;
+    border-radius: 50px;
+    border: 3px solid var(--retro-teal);
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    background: none;
+    font-family: inherit;
+  }
+  .retro-btn-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(18,118,118,0.3);
+  }
+  .retro-btn-pill-text {
+    background: var(--retro-jaune);
+    color: var(--retro-ink);
+    padding: 0.6rem 1.4rem;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .retro-btn-pill-icon {
+    background: var(--retro-orange);
+    color: var(--retro-paper);
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+  .retro-btn-pill.primary .retro-btn-pill-text {
+    background: var(--retro-orange);
+    color: var(--retro-paper);
+    font-size: 1rem;
+    padding: 0.75rem 1.8rem;
+  }
+  .retro-btn-pill.primary .retro-btn-pill-icon {
+    background: var(--retro-jaune);
+    color: var(--retro-ink);
+    width: 56px;
+    font-size: 1rem;
+  }
+  .retro-btn-pill:disabled,
+  .retro-btn-pill[disabled] {
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  /* ─── MAIN ───────────────────────────────────── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  /* ─── SEPARATORS ─────────────────────────────── */
+  .retro-separator {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0;
+    color: var(--retro-teal);
+  }
+  .retro-separator::before,
+  .retro-separator::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--retro-teal) 20%, var(--retro-teal) 80%, transparent);
+  }
+  .retro-separator .flourish { font-size: 1.2rem; opacity: 0.8; }
+
+  /* ─── SECTION TITLES ─────────────────────────── */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .section-title-icon {
+    background: var(--retro-teal);
+    color: var(--retro-paper);
+    width: 44px;
+    height: 44px;
+    border-radius: 10px 4px 10px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .section-title h2 {
+    font-family: 'Oswald', Impact, Arial Narrow, sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--retro-teal);
+  }
+
+  /* ─── CARDS ──────────────────────────────────── */
+  .retro-card {
+    background: var(--retro-paper);
+    border: 3px solid var(--retro-teal);
+    border-radius: 20px 6px 20px 6px;
+    box-shadow: inset 0 0 0 2px rgba(228,99,46,0.35);
+    padding: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .retro-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 6px; height: 100%;
+    background: var(--retro-orange);
+    border-radius: 0;
+  }
+  .retro-card:hover {
+    transform: translateY(-4px);
+    box-shadow: inset 0 0 0 2px var(--retro-orange), 0 12px 32px rgba(18,118,118,0.18);
+  }
+  .retro-card h3 {
+    font-family: 'Oswald', Impact, Arial Narrow, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--retro-ink);
+    margin-bottom: 10px;
+    padding-left: 10px;
+  }
+  .retro-card p {
+    font-size: 0.875rem;
+    color: #3d4a4a;
+    line-height: 1.6;
+    padding-left: 10px;
+  }
+  .retro-card .card-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--retro-teal);
+    margin-top: 18px;
+    padding-left: 10px;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 640px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .cards-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  /* ─── IA SECTION ──────────────────────────────── */
+  .ia-section {
+    background: var(--retro-ink);
+    border: 3px solid var(--retro-teal);
+    border-radius: 24px 8px 24px 8px;
+    box-shadow: inset 0 0 0 2px rgba(228,99,46,0.4);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ia-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 5px;
+    background: linear-gradient(90deg, var(--retro-teal), var(--retro-orange), var(--retro-jaune));
+  }
+
+  .ia-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  @media (min-width: 768px) {
+    .ia-header { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+  .ia-title-block {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .ia-icon {
+    background: var(--retro-orange);
+    color: var(--retro-paper);
+    width: 56px; height: 56px;
+    border-radius: 14px 4px 14px 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    border: 2px solid var(--retro-jaune);
+  }
+  .ia-title-text h2 {
+    font-family: 'Oswald', Impact, Arial Narrow, sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--retro-paper);
+  }
+  .ia-title-text p {
+    color: var(--retro-jaune);
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .gem-badge {
+    background: linear-gradient(90deg, var(--retro-teal), #0a9090);
+    color: var(--retro-paper);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    border: 1px solid var(--retro-jaune);
+  }
+
+  .ia-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  @media (min-width: 768px) { .ia-grid { grid-template-columns: 1fr 2fr; } }
+
+  /* Form panel */
+  .ia-form-panel {
+    background: rgba(18,118,118,0.08);
+    border: 2px solid var(--retro-teal);
+    border-radius: 16px 4px 16px 4px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .field-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--retro-jaune);
+    margin-bottom: 8px;
+  }
+  .retro-select {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--retro-ink);
+    border: 2px solid var(--retro-teal);
+    border-radius: 10px 3px 10px 3px;
+    color: var(--retro-paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .retro-select:focus {
+    border-color: var(--retro-jaune);
+  }
+  .retro-select option {
+    background: var(--retro-ink);
+  }
+
+  /* Result panel */
+  .ia-result-panel {
+    background: rgba(18,118,118,0.05);
+    border: 2px solid var(--retro-teal);
+    border-radius: 16px 4px 16px 4px;
+    min-height: 420px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #result-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 380px;
+    padding: 40px;
+    text-align: center;
+    color: rgba(242,239,230,0.3);
+  }
+  #result-placeholder i { font-size: 4rem; margin-bottom: 16px; }
+  #result-placeholder p { font-size: 1rem; line-height: 1.6; }
+  #result-placeholder .sub {
+    font-size: 0.82rem;
+    color: rgba(242,239,230,0.2);
+    margin-top: 8px;
+    letter-spacing: 0.06em;
+  }
+
+  #result-content {
+    display: none;
+    padding: 28px;
+    overflow-y: auto;
+    max-height: 580px;
+    color: var(--retro-paper);
+  }
+  #result-content h1 { font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--retro-jaune); margin-bottom: 16px; }
+  #result-content h2 { font-family: 'Oswald', sans-serif; font-size: 1.15rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--retro-teal); border-bottom: 1px solid rgba(18,118,118,0.4); padding-bottom: 6px; margin: 24px 0 12px; }
+  #result-content h3 { font-size: 1rem; font-weight: 700; color: var(--retro-orange); margin: 16px 0 8px; }
+  #result-content li { margin-left: 20px; margin-bottom: 4px; font-size: 0.9rem; line-height: 1.7; }
+  #result-content strong { color: var(--retro-jaune); font-weight: 700; }
+  #result-content br { line-height: 1.8; }
+
+  .copy-btn {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: rgba(18,118,118,0.3);
+    border: 1px solid var(--retro-teal);
+    color: var(--retro-paper);
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.15s;
+    display: none;
+  }
+  .copy-btn:hover { background: var(--retro-teal); }
+
+  /* Loader */
+  .loader {
+    width: 20px; height: 20px;
+    border: 3px solid rgba(242,239,230,0.2);
+    border-top: 3px solid var(--retro-jaune);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    display: none;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ─── MODAL ──────────────────────────────────── */
+  #modal {
+    position: fixed; inset: 0;
+    background: rgba(13,22,23,0.8);
+    z-index: 50;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    backdrop-filter: blur(4px);
+  }
+  #modal.open { display: flex; }
+  .modal-inner {
+    background: var(--retro-paper);
+    border: 3px solid var(--retro-teal);
+    border-radius: 24px 8px 24px 8px;
+    box-shadow: inset 0 0 0 2px rgba(228,99,46,0.4), 0 24px 80px rgba(13,22,23,0.8);
+    max-width: 640px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 40px;
+    position: relative;
+  }
+  .modal-inner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 5px;
+    background: linear-gradient(90deg, var(--retro-teal), var(--retro-orange));
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: none; border: none;
+    color: var(--retro-teal);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+  .modal-close:hover { background: var(--retro-teal-light); }
+  #modal-content h2 {
+    font-family: 'Oswald', Impact, Arial Narrow, sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--retro-teal);
+    margin-bottom: 12px;
+  }
+  #modal-content .modal-def {
+    font-size: 1rem;
+    color: #2d3838;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .modal-steps {
+    background: var(--retro-teal-light);
+    border: 2px solid var(--retro-teal);
+    border-radius: 14px 4px 14px 4px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .modal-steps h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--retro-teal);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .modal-steps ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .modal-steps li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.9rem; color: var(--retro-ink); line-height: 1.5;
+  }
+  .modal-steps li .check {
+    color: var(--retro-teal); font-size: 0.85rem; margin-top: 2px; flex-shrink: 0;
+  }
+  .modal-tags {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .modal-tag {
+    background: var(--retro-ink);
+    color: var(--retro-paper);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .modal-tag i { color: var(--retro-jaune); }
+
+  /* ─── FOOTER SEPARATOR ───────────────────────── */
+  .footer-sep {
+    max-width: 1100px;
+    margin: 48px auto 0;
+    padding: 0 32px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-frame">
+
+  <!-- Corner flourishes (Art Nouveau) -->
+  <svg class="corner-flourish top-left" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 60 Q4 4 60 4" stroke="currentColor" stroke-width="2" fill="none"/>
+    <path d="M4 44 Q20 28 36 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" opacity="0.6"/>
+    <path d="M8 32 Q16 24 24 32 Q16 40 8 32Z" fill="currentColor" opacity="0.4"/>
+    <path d="M32 8 Q40 16 32 24 Q24 16 32 8Z" fill="currentColor" opacity="0.4"/>
+  </svg>
+  <svg class="corner-flourish top-right" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 60 Q4 4 60 4" stroke="currentColor" stroke-width="2" fill="none"/>
+    <path d="M4 44 Q20 28 36 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" opacity="0.6"/>
+    <path d="M8 32 Q16 24 24 32 Q16 40 8 32Z" fill="currentColor" opacity="0.4"/>
+    <path d="M32 8 Q40 16 32 24 Q24 16 32 8Z" fill="currentColor" opacity="0.4"/>
+  </svg>
+  <svg class="corner-flourish bottom-left" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 60 Q4 4 60 4" stroke="currentColor" stroke-width="2" fill="none"/>
+    <path d="M4 44 Q20 28 36 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" opacity="0.6"/>
+    <path d="M8 32 Q16 24 24 32 Q16 40 8 32Z" fill="currentColor" opacity="0.4"/>
+    <path d="M32 8 Q40 16 32 24 Q24 16 32 8Z" fill="currentColor" opacity="0.4"/>
+  </svg>
+  <svg class="corner-flourish bottom-right" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 60 Q4 4 60 4" stroke="currentColor" stroke-width="2" fill="none"/>
+    <path d="M4 44 Q20 28 36 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
+    <circle cx="14" cy="14" r="3" fill="currentColor" opacity="0.6"/>
+    <path d="M8 32 Q16 24 24 32 Q16 40 8 32Z" fill="currentColor" opacity="0.4"/>
+    <path d="M32 8 Q40 16 32 24 Q24 16 32 8Z" fill="currentColor" opacity="0.4"/>
+  </svg>
+
+  <!-- ─── HEADER ─────────────────────────────────── -->
+  <header>
+    <div class="header-inner">
+      <div class="header-brand">
+        <h1>Labo Débat <span>Bruxelles</span></h1>
+        <p>Ressources &amp; IA pour enseignants du secondaire</p>
+      </div>
+      <div class="header-nav">
+        <button onclick="scrollToSection('methodes')" class="retro-btn-pill">
+          <span class="retro-btn-pill-text"><i class="fas fa-book-open"></i> Méthodes</span>
+          <span class="retro-btn-pill-icon"><i class="fas fa-chevron-right"></i></span>
+        </button>
+        <button onclick="scrollToSection('ia-gen')" class="retro-btn-pill primary">
+          <span class="retro-btn-pill-text"><i class="fas fa-wand-magic-sparkles"></i> Générateur IA</span>
+          <span class="retro-btn-pill-icon"><i class="fas fa-chevron-right"></i></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ─── SECTION MÉTHODES ──────────────────────── -->
+    <section id="methodes">
+      <div class="section-title">
+        <div class="section-title-icon"><i class="fas fa-book-open"></i></div>
+        <h2>Catalogue des Débats Pédagogiques</h2>
+      </div>
+
+      <div class="cards-grid">
+        <div class="retro-card" onclick="showDetail('mouvant')">
+          <h3>Débat Mouvant</h3>
+          <p>Inspiré des caucus américains. Forme dynamique où les élèves se déplacent physiquement.</p>
+          <div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
+        </div>
+        <div class="retro-card" onclick="showDetail('silencieux')">
+          <h3>Débat Silencieux</h3>
+          <p>Privilégie l'écrit. Ce qui est écrit est plus important que celui qui l'écrit.</p>
+          <div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
+        </div>
+        <div class="retro-card" onclick="showDetail('boule')">
+          <h3>Débat Boule de Neige</h3>
+          <p>Maturation collective : individuel, binôme, groupe, classe entière.</p>
+          <div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
+        </div>
+        <div class="retro-card" onclick="showDetail('tournant')">
+          <h3>Débat Tournant</h3>
+          <p>Observation mutuelle et argumentation en petits groupes (3-4 élèves).</p>
+          <div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
+        </div>
+        <div class="retro-card" onclick="showDetail('panel')">
+          <h3>Débat avec Panel</h3>
+          <p>Un groupe d'experts discute devant un auditoire silencieux.</p>
+          <div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
+        </div>
+        <div class="retro-card" onclick="showDetail('qsort')">
+          <h3>Débat Q-Sort</h3>
+          <p>Faire émerger les représentations et préjugés par le classement d'affirmations.</p>
+          <div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Separator -->
+    <div class="retro-separator">
+      <span class="flourish">❧</span>
+      <span class="flourish">✿</span>
+      <span class="flourish">❧</span>
+    </div>
+
+    <!-- ─── SECTION IA ──────────────────────────────── -->
+    <section id="ia-gen" class="ia-section">
+      <div class="ia-header">
+        <div class="ia-title-block">
+          <div class="ia-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+          <div class="ia-title-text">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <h2>Gem : Expert Débats Mobiles</h2>
+              <span class="gem-badge">Actif</span>
+            </div>
+            <p>IA entraînée sur vos fiches méthodologiques pour Bruxelles</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ia-grid">
+        <!-- Formulaire -->
+        <div class="ia-form-panel">
+          <div>
+            <label class="field-label">Méthode issue des PDF</label>
+            <select id="ia-method" class="retro-select">
+              <option value="Débat Mouvant">Débat Mouvant</option>
+              <option value="Débat Silencieux">Débat Silencieux</option>
+              <option value="Débat Boule de Neige">Boule de Neige</option>
+              <option value="Débat Tournant">Débat Tournant</option>
+              <option value="Débat avec Panel">Débat avec Panel</option>
+              <option value="Débat Q-Sort">Q-Sort (Classement)</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label">Niveau (Fédération W-B)</label>
+            <select id="ia-level" class="retro-select">
+              <option value="Cycle 3 (10-12 ans)">Cycle 3 (Primaire sup.)</option>
+              <option value="Cycle 4 (12-15 ans)">Cycle 4 (Sec. inférieur)</option>
+              <option value="Lycée (15-18 ans)">Lycée (Sec. supérieur)</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label">Focus Smartphone</label>
+            <select id="ia-focus" class="retro-select">
+              <option value="santé et concentration">Santé &amp; Concentration</option>
+              <option value="harcèlement et vie sociale">Harcèlement &amp; Social</option>
+              <option value="pédagogie vs distraction">Pédagogie vs Distraction</option>
+              <option value="règlement et libertés">Règlement &amp; Libertés</option>
+            </select>
+          </div>
+          <button id="generate-btn" onclick="generateDebate()" class="retro-btn-pill primary" style="width:100%;justify-content:center;">
+            <span class="retro-btn-pill-text" style="flex:1;justify-content:center;">
+              <i class="fas fa-sparkles"></i> Interroger le Gem
+              <div id="loader" class="loader"></div>
+            </span>
+            <span class="retro-btn-pill-icon"><i class="fas fa-chevron-right"></i></span>
+          </button>
+        </div>
+
+        <!-- Résultat -->
+        <div class="ia-result-panel">
+          <button id="copy-btn" class="copy-btn" onclick="copyResult()"><i class="fas fa-copy"></i></button>
+          <div id="result-placeholder">
+            <i class="fas fa-brain"></i>
+            <p>L'IA est prête à appliquer vos méthodes.</p>
+            <p class="sub">Générez un scénario sur l'interdiction du smartphone.</p>
+          </div>
+          <div id="result-content"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer separator -->
+    <div class="retro-separator">
+      <span class="flourish">❀</span>
+      <span class="flourish">⚘</span>
+      <span class="flourish">❀</span>
+    </div>
+
+  </main>
+</div><!-- /.page-frame -->
+
+
+<!-- ─── MODAL ──────────────────────────────────── -->
+<div id="modal" onclick="closeModalOutside(event)">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+
+<script>
+const apiKey = "AIzaSyCphJje0z9pBSU9jc2cVA0tFdpuSNGo5Wg";
+
+const methodData = {
+  mouvant: {
+    title: "Débat Mouvant",
+    def: "Forme dynamique de positionnement physique (Accord/Désaccord).",
+    steps: ["Espace dégagé (deux pôles).", "Affirmation forte énoncée.", "Déplacement des élèves.", "Justification des positions.", "Échanges et changements possibles."],
+    duration: "15-20 min",
+    target: "EMC, Cycles 3, 4 et Lycée."
+  },
+  silencieux: {
+    title: "Débat Silencieux",
+    def: "Débat écrit sur affiches pour favoriser la réflexion profonde.",
+    steps: ["Affiches murales avec questions.", "Circulation silencieuse.", "Réaction écrite et interaction par écrit.", "Synthèse orale finale."],
+    duration: "20 min + synthèse",
+    target: "Sujets sensibles, gestion des leaders."
+  },
+  boule: {
+    title: "Débat Boule de Neige",
+    def: "Maturation collective d'une idée (individuel → binôme → groupe → classe).",
+    steps: ["Individuel (5-10 min).", "Binôme (10 min).", "Groupes de 4 (15 min).", "Mise en commun finale."],
+    duration: "45-60 min",
+    target: "Élaboration collaborative (Règlement intérieur)."
+  },
+  tournant: {
+    title: "Débat Tournant",
+    def: "Débat en petits groupes avec rôles alternés (débatteurs/observateurs).",
+    steps: ["Groupes de 4.", "2 débattent / 2 observent.", "Inversion des rôles.", "Bilan sur les compétences d'interaction."],
+    duration: "1 heure",
+    target: "Compétences de communication orale."
+  },
+  panel: {
+    title: "Débat avec Panel",
+    def: "Groupe restreint d'experts discutant devant un auditoire.",
+    steps: ["Constitution du panel.", "Discussion guidée devant la classe.", "Public transmet des questions écrites.", "Réponses du panel."],
+    duration: "30-45 min",
+    target: "Étude d'un problème spécifique."
+  },
+  qsort: {
+    title: "Débat Q-Sort",
+    def: "Classement d'affirmations pour faire émerger les représentations.",
+    steps: ["Distribution de cartes/affirmations.", "Classement individuel ou groupe.", "Confrontation des classements.", "Analyse des préjugés."],
+    duration: "20-30 min",
+    target: "Déconstruction des idées reçues."
+  }
+};
+
+function showDetail(id) {
+  const data = methodData[id];
+  const content = `
+    <h2>${data.title}</h2>
+    <p class="modal-def">${data.def}</p>
+    <div class="modal-steps">
+      <h4><i class="fas fa-list-ol"></i> Démarche issue des PDF</h4>
+      <ul>
+        ${data.steps.map(s => `<li><span class="check"><i class="fas fa-check"></i></span> ${s}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="modal-tags">
+      <span class="modal-tag"><i class="fas fa-clock"></i> ${data.duration}</span>
+      <span class="modal-tag"><i class="fas fa-graduation-cap"></i> ${data.target}</span>
+    </div>
+  `;
+  document.getElementById('modal-content').innerHTML = content;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+async function generateDebate() {
+  const method = document.getElementById('ia-method').value;
+  const level = document.getElementById('ia-level').value;
+  const focus = document.getElementById('ia-focus').value;
+  const btn = document.getElementById('generate-btn');
+  const loader = document.getElementById('loader');
+  const placeholder = document.getElementById('result-placeholder');
+  const content = document.getElementById('result-content');
+  const copyBtn = document.getElementById('copy-btn');
+
+  btn.disabled = true;
+  loader.style.display = 'block';
+
+  const systemPrompt = `Tu es le "Gem Expert Débat Bruxelles".
+Tes connaissances sont basées sur 6 documents de référence (Mouvant, Silencieux, Boule de Neige, Tournant, Panel, Q-Sort).
+Ton rôle est de créer des fiches de cours pour les enseignants de secondaire à Bruxelles.
+SUJET UNIQUE : L'interdiction du smartphone à l'école.
+CONSIGNES STRICTES :
+1. Applique scrupuleusement la méthodologie demandée (ex: si "Silencieux", prévois des affiches).
+2. Adapte le langage au niveau scolaire belge indiqué.
+3. Inclus toujours : une question de départ percutante, 6 arguments (3 Pro/3 Contre), et une structure de séance pas à pas.
+4. Ajoute une section "Conseils du Gem" pour la médiation.
+5. Utilise un ton pro, structuré (Markdown).`;
+
+  const userQuery = `Génère une séance de ${method} pour le niveau ${level} sur le focus : ${focus}.`;
+
+  try {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: userQuery }] }],
+        systemInstruction: { parts: [{ text: systemPrompt }] }
+      })
+    });
+    const data = await response.json();
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (text) {
+      placeholder.style.display = 'none';
+      content.style.display = 'block';
+      copyBtn.style.display = 'block';
+      content.innerHTML = formatMarkdown(text);
+    }
+  } catch (error) {
+    placeholder.style.display = 'none';
+    content.style.display = 'block';
+    content.innerHTML = "<p style='color:#E4632E'>Erreur Gem : Impossible de générer la séance.</p>";
+  } finally {
+    btn.disabled = false;
+    loader.style.display = 'none';
+  }
+}
+
+function copyResult() {
+  const text = document.getElementById('result-content').innerText;
+  navigator.clipboard.writeText(text).catch(() => {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+  });
+  const btn = document.getElementById('copy-btn');
+  btn.innerHTML = '<i class="fas fa-check"></i>';
+  setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i>'; }, 1800);
+}
+
+function formatMarkdown(text) {
+  return text
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^\* (.*$)/gim, '<li>$1</li>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+</script>
+</body>
+</html>
