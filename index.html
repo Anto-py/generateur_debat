@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Labo Débat - École Secondaire Bruxelles</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
   :root {
     --retro-teal: #127676;
@@ -568,197 +569,185 @@
 </style>
 </head>
 <body>
-
 <div class="page-frame">
-
-  <!-- Corner flourishes (Art Nouveau) -->
-  <svg class="corner-flourish top-left" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 60 Q4 4 60 4" stroke="currentColor" stroke-width="2" fill="none"/>
-    <path d="M4 44 Q20 28 36 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" opacity="0.6"/>
-    <path d="M8 32 Q16 24 24 32 Q16 40 8 32Z" fill="currentColor" opacity="0.4"/>
-    <path d="M32 8 Q40 16 32 24 Q24 16 32 8Z" fill="currentColor" opacity="0.4"/>
-  </svg>
-  <svg class="corner-flourish top-right" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 60 Q4 4 60 4" stroke="currentColor" stroke-width="2" fill="none"/>
-    <path d="M4 44 Q20 28 36 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" opacity="0.6"/>
-    <path d="M8 32 Q16 24 24 32 Q16 40 8 32Z" fill="currentColor" opacity="0.4"/>
-    <path d="M32 8 Q40 16 32 24 Q24 16 32 8Z" fill="currentColor" opacity="0.4"/>
-  </svg>
-  <svg class="corner-flourish bottom-left" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 60 Q4 4 60 4" stroke="currentColor" stroke-width="2" fill="none"/>
-    <path d="M4 44 Q20 28 36 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" opacity="0.6"/>
-    <path d="M8 32 Q16 24 24 32 Q16 40 8 32Z" fill="currentColor" opacity="0.4"/>
-    <path d="M32 8 Q40 16 32 24 Q24 16 32 8Z" fill="currentColor" opacity="0.4"/>
-  </svg>
-  <svg class="corner-flourish bottom-right" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 60 Q4 4 60 4" stroke="currentColor" stroke-width="2" fill="none"/>
-    <path d="M4 44 Q20 28 36 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-dasharray="3 3"/>
-    <circle cx="14" cy="14" r="3" fill="currentColor" opacity="0.6"/>
-    <path d="M8 32 Q16 24 24 32 Q16 40 8 32Z" fill="currentColor" opacity="0.4"/>
-    <path d="M32 8 Q40 16 32 24 Q24 16 32 8Z" fill="currentColor" opacity="0.4"/>
-  </svg>
-
-  <!-- ─── HEADER ─────────────────────────────────── -->
-  <header>
-    <div class="header-inner">
-      <div class="header-brand">
-        <h1>Labo Débat <span>Bruxelles</span></h1>
-        <p>Ressources &amp; IA pour enseignants du secondaire</p>
-      </div>
-      <div class="header-nav">
-        <button onclick="scrollToSection('methodes')" class="retro-btn-pill">
-          <span class="retro-btn-pill-text"><i class="fas fa-book-open"></i> Méthodes</span>
-          <span class="retro-btn-pill-icon"><i class="fas fa-chevron-right"></i></span>
-        </button>
-        <button onclick="scrollToSection('ia-gen')" class="retro-btn-pill primary">
-          <span class="retro-btn-pill-text"><i class="fas fa-wand-magic-sparkles"></i> Générateur IA</span>
-          <span class="retro-btn-pill-icon"><i class="fas fa-chevron-right"></i></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main>
-
-    <!-- ─── SECTION MÉTHODES ──────────────────────── -->
-    <section id="methodes">
-      <div class="section-title">
-        <div class="section-title-icon"><i class="fas fa-book-open"></i></div>
-        <h2>Catalogue des Débats Pédagogiques</h2>
-      </div>
-
-      <div class="cards-grid">
-        <div class="retro-card" onclick="showDetail('mouvant')">
-          <h3>Débat Mouvant</h3>
-          <p>Inspiré des caucus américains. Forme dynamique où les élèves se déplacent physiquement.</p>
-          <div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
-        </div>
-        <div class="retro-card" onclick="showDetail('silencieux')">
-          <h3>Débat Silencieux</h3>
-          <p>Privilégie l'écrit. Ce qui est écrit est plus important que celui qui l'écrit.</p>
-          <div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
-        </div>
-        <div class="retro-card" onclick="showDetail('boule')">
-          <h3>Débat Boule de Neige</h3>
-          <p>Maturation collective : individuel, binôme, groupe, classe entière.</p>
-          <div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
-        </div>
-        <div class="retro-card" onclick="showDetail('tournant')">
-          <h3>Débat Tournant</h3>
-          <p>Observation mutuelle et argumentation en petits groupes (3-4 élèves).</p>
-          <div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
-        </div>
-        <div class="retro-card" onclick="showDetail('panel')">
-          <h3>Débat avec Panel</h3>
-          <p>Un groupe d'experts discute devant un auditoire silencieux.</p>
-          <div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
-        </div>
-        <div class="retro-card" onclick="showDetail('qsort')">
-          <h3>Débat Q-Sort</h3>
-          <p>Faire émerger les représentations et préjugés par le classement d'affirmations.</p>
-          <div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Separator -->
-    <div class="retro-separator">
-      <span class="flourish">❧</span>
-      <span class="flourish">✿</span>
-      <span class="flourish">❧</span>
-    </div>
-
-    <!-- ─── SECTION IA ──────────────────────────────── -->
-    <section id="ia-gen" class="ia-section">
-      <div class="ia-header">
-        <div class="ia-title-block">
-          <div class="ia-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
-          <div class="ia-title-text">
-            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-              <h2>Gem : Expert Débats Mobiles</h2>
-              <span class="gem-badge">Actif</span>
-            </div>
-            <p>IA entraînée sur vos fiches méthodologiques pour Bruxelles</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="ia-grid">
-        <!-- Formulaire -->
-        <div class="ia-form-panel">
-          <div>
-            <label class="field-label">Méthode issue des PDF</label>
-            <select id="ia-method" class="retro-select">
-              <option value="Débat Mouvant">Débat Mouvant</option>
-              <option value="Débat Silencieux">Débat Silencieux</option>
-              <option value="Débat Boule de Neige">Boule de Neige</option>
-              <option value="Débat Tournant">Débat Tournant</option>
-              <option value="Débat avec Panel">Débat avec Panel</option>
-              <option value="Débat Q-Sort">Q-Sort (Classement)</option>
-            </select>
-          </div>
-          <div>
-            <label class="field-label">Niveau (Fédération W-B)</label>
-            <select id="ia-level" class="retro-select">
-              <option value="Cycle 3 (10-12 ans)">Cycle 3 (Primaire sup.)</option>
-              <option value="Cycle 4 (12-15 ans)">Cycle 4 (Sec. inférieur)</option>
-              <option value="Lycée (15-18 ans)">Lycée (Sec. supérieur)</option>
-            </select>
-          </div>
-          <div>
-            <label class="field-label">Focus Smartphone</label>
-            <select id="ia-focus" class="retro-select">
-              <option value="santé et concentration">Santé &amp; Concentration</option>
-              <option value="harcèlement et vie sociale">Harcèlement &amp; Social</option>
-              <option value="pédagogie vs distraction">Pédagogie vs Distraction</option>
-              <option value="règlement et libertés">Règlement &amp; Libertés</option>
-            </select>
-          </div>
-          <button id="generate-btn" onclick="generateDebate()" class="retro-btn-pill primary" style="width:100%;justify-content:center;">
-            <span class="retro-btn-pill-text" style="flex:1;justify-content:center;">
-              <i class="fas fa-sparkles"></i> Interroger le Gem
-              <div id="loader" class="loader"></div>
-            </span>
-            <span class="retro-btn-pill-icon"><i class="fas fa-chevron-right"></i></span>
-          </button>
-        </div>
-
-        <!-- Résultat -->
-        <div class="ia-result-panel">
-          <button id="copy-btn" class="copy-btn" onclick="copyResult()"><i class="fas fa-copy"></i></button>
-          <div id="result-placeholder">
-            <i class="fas fa-brain"></i>
-            <p>L'IA est prête à appliquer vos méthodes.</p>
-            <p class="sub">Générez un scénario sur l'interdiction du smartphone.</p>
-          </div>
-          <div id="result-content"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer separator -->
-    <div class="retro-separator">
-      <span class="flourish">❀</span>
-      <span class="flourish">⚘</span>
-      <span class="flourish">❀</span>
-    </div>
-
-  </main>
-</div><!-- /.page-frame -->
-
-
+<!-- Corner flourishes (Art Nouveau) -->
+<svg class="corner-flourish top-left" fill="none" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 60 Q4 4 60 4" fill="none" stroke="currentColor" stroke-width="2"></path>
+<path d="M4 44 Q20 28 36 4" fill="none" stroke="currentColor" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<circle cx="14" cy="14" fill="currentColor" opacity="0.6" r="3"></circle>
+<path d="M8 32 Q16 24 24 32 Q16 40 8 32Z" fill="currentColor" opacity="0.4"></path>
+<path d="M32 8 Q40 16 32 24 Q24 16 32 8Z" fill="currentColor" opacity="0.4"></path>
+</svg>
+<svg class="corner-flourish top-right" fill="none" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 60 Q4 4 60 4" fill="none" stroke="currentColor" stroke-width="2"></path>
+<path d="M4 44 Q20 28 36 4" fill="none" stroke="currentColor" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<circle cx="14" cy="14" fill="currentColor" opacity="0.6" r="3"></circle>
+<path d="M8 32 Q16 24 24 32 Q16 40 8 32Z" fill="currentColor" opacity="0.4"></path>
+<path d="M32 8 Q40 16 32 24 Q24 16 32 8Z" fill="currentColor" opacity="0.4"></path>
+</svg>
+<svg class="corner-flourish bottom-left" fill="none" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 60 Q4 4 60 4" fill="none" stroke="currentColor" stroke-width="2"></path>
+<path d="M4 44 Q20 28 36 4" fill="none" stroke="currentColor" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<circle cx="14" cy="14" fill="currentColor" opacity="0.6" r="3"></circle>
+<path d="M8 32 Q16 24 24 32 Q16 40 8 32Z" fill="currentColor" opacity="0.4"></path>
+<path d="M32 8 Q40 16 32 24 Q24 16 32 8Z" fill="currentColor" opacity="0.4"></path>
+</svg>
+<svg class="corner-flourish bottom-right" fill="none" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 60 Q4 4 60 4" fill="none" stroke="currentColor" stroke-width="2"></path>
+<path d="M4 44 Q20 28 36 4" fill="none" stroke="currentColor" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<circle cx="14" cy="14" fill="currentColor" opacity="0.6" r="3"></circle>
+<path d="M8 32 Q16 24 24 32 Q16 40 8 32Z" fill="currentColor" opacity="0.4"></path>
+<path d="M32 8 Q40 16 32 24 Q24 16 32 8Z" fill="currentColor" opacity="0.4"></path>
+</svg>
+<!-- ─── HEADER ─────────────────────────────────── -->
+<header>
+<div class="header-inner">
+<div class="header-brand">
+<h1>Labo Débat <span>Bruxelles</span></h1>
+<p>Ressources &amp; IA pour enseignants du secondaire</p>
+</div>
+<div class="header-nav">
+<button class="retro-btn-pill" onclick="scrollToSection('methodes')">
+<span class="retro-btn-pill-text"><i class="fas fa-book-open"></i> Méthodes</span>
+<span class="retro-btn-pill-icon"><i class="fas fa-chevron-right"></i></span>
+</button>
+<button class="retro-btn-pill primary" onclick="scrollToSection('ia-gen')">
+<span class="retro-btn-pill-text"><i class="fas fa-wand-magic-sparkles"></i> Générateur IA</span>
+<span class="retro-btn-pill-icon"><i class="fas fa-chevron-right"></i></span>
+</button>
+</div>
+</div>
+</header>
+<main>
+<!-- ─── SECTION MÉTHODES ──────────────────────── -->
+<section id="methodes">
+<div class="section-title">
+<div class="section-title-icon"><i class="fas fa-book-open"></i></div>
+<h2>Catalogue des Débats Pédagogiques</h2>
+</div>
+<div class="cards-grid">
+<div class="retro-card" onclick="showDetail('mouvant')">
+<h3>Débat Mouvant</h3>
+<p>Inspiré des caucus américains. Forme dynamique où les élèves se déplacent physiquement.</p>
+<div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
+</div>
+<div class="retro-card" onclick="showDetail('silencieux')">
+<h3>Débat Silencieux</h3>
+<p>Privilégie l'écrit. Ce qui est écrit est plus important que celui qui l'écrit.</p>
+<div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
+</div>
+<div class="retro-card" onclick="showDetail('boule')">
+<h3>Débat Boule de Neige</h3>
+<p>Maturation collective : individuel, binôme, groupe, classe entière.</p>
+<div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
+</div>
+<div class="retro-card" onclick="showDetail('tournant')">
+<h3>Débat Tournant</h3>
+<p>Observation mutuelle et argumentation en petits groupes (3-4 élèves).</p>
+<div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
+</div>
+<div class="retro-card" onclick="showDetail('panel')">
+<h3>Débat avec Panel</h3>
+<p>Un groupe d'experts discute devant un auditoire silencieux.</p>
+<div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
+</div>
+<div class="retro-card" onclick="showDetail('qsort')">
+<h3>Débat Q-Sort</h3>
+<p>Faire émerger les représentations et préjugés par le classement d'affirmations.</p>
+<div class="card-link">Voir la fiche <i class="fas fa-arrow-right" style="font-size:0.7rem"></i></div>
+</div>
+</div>
+</section>
+<!-- Separator -->
+<div class="retro-separator">
+<span class="flourish">❧</span>
+<span class="flourish">✿</span>
+<span class="flourish">❧</span>
+</div>
+<!-- ─── SECTION IA ──────────────────────────────── -->
+<section class="ia-section" id="ia-gen">
+<div class="ia-header">
+<div class="ia-title-block">
+<div class="ia-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+<div class="ia-title-text">
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+<h2>Gem : Expert Débats Mobiles</h2>
+<span class="gem-badge">Actif</span>
+</div>
+<p>IA entraînée sur vos fiches méthodologiques pour Bruxelles</p>
+</div>
+</div>
+</div>
+<div class="ia-grid">
+<!-- Formulaire -->
+<div class="ia-form-panel">
+<div>
+<label class="field-label">Méthode issue des PDF</label>
+<select class="retro-select" id="ia-method">
+<option value="Débat Mouvant">Débat Mouvant</option>
+<option value="Débat Silencieux">Débat Silencieux</option>
+<option value="Débat Boule de Neige">Boule de Neige</option>
+<option value="Débat Tournant">Débat Tournant</option>
+<option value="Débat avec Panel">Débat avec Panel</option>
+<option value="Débat Q-Sort">Q-Sort (Classement)</option>
+</select>
+</div>
+<div>
+<label class="field-label">Niveau (Fédération W-B)</label>
+<select class="retro-select" id="ia-level">
+<option value="Cycle 3 (10-12 ans)">Cycle 3 (Primaire sup.)</option>
+<option value="Cycle 4 (12-15 ans)">Cycle 4 (Sec. inférieur)</option>
+<option value="Lycée (15-18 ans)">Lycée (Sec. supérieur)</option>
+</select>
+</div>
+<div>
+<label class="field-label">Focus Smartphone</label>
+<select class="retro-select" id="ia-focus">
+<option value="santé et concentration">Santé &amp; Concentration</option>
+<option value="harcèlement et vie sociale">Harcèlement &amp; Social</option>
+<option value="pédagogie vs distraction">Pédagogie vs Distraction</option>
+<option value="règlement et libertés">Règlement &amp; Libertés</option>
+</select>
+</div>
+<button class="retro-btn-pill primary" id="generate-btn" onclick="generateDebate()" style="width:100%;justify-content:center;">
+<span class="retro-btn-pill-text" style="flex:1;justify-content:center;">
+<i class="fas fa-sparkles"></i> Interroger le Gem
+              <div class="loader" id="loader"></div>
+</span>
+<span class="retro-btn-pill-icon"><i class="fas fa-chevron-right"></i></span>
+</button>
+</div>
+<!-- Résultat -->
+<div class="ia-result-panel">
+<button class="copy-btn" id="copy-btn" onclick="copyResult()"><i class="fas fa-copy"></i></button>
+<div id="result-placeholder">
+<i class="fas fa-brain"></i>
+<p>L'IA est prête à appliquer vos méthodes.</p>
+<p class="sub">Générez un scénario sur l'interdiction du smartphone.</p>
+</div>
+<div id="result-content"></div>
+</div>
+</div>
+</section>
+<!-- Footer separator -->
+<div class="retro-separator">
+<span class="flourish">❀</span>
+<span class="flourish">⚘</span>
+<span class="flourish">❀</span>
+</div>
+</main>
+<div class="ab-attribution" style="text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(128,128,128,0.25);font-size:0.8rem;opacity:0.65;">
+<a href="https://www.linkedin.com/in/antonin-bareau/" rel="noopener" style="font-weight:bold;color:inherit;text-decoration:none;" target="_blank">Antonin Bareau</a>
+   — 
+  <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" style="color:inherit;text-decoration:none;" target="_blank">Licence CC BY-SA 4.0</a>
+</div></div><!-- /.page-frame -->
 <!-- ─── MODAL ──────────────────────────────────── -->
 <div id="modal" onclick="closeModalOutside(event)">
-  <div class="modal-inner">
-    <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
-    <div id="modal-content"></div>
-  </div>
+<div class="modal-inner">
+<button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+<div id="modal-content"></div>
 </div>
-
-
+</div>
 <script>
 const apiKey = "AIzaSyCphJje0z9pBSU9jc2cVA0tFdpuSNGo5Wg";
 
@@ -821,11 +810,6 @@ function showDetail(id) {
     <div class="modal-tags">
       <span class="modal-tag"><i class="fas fa-clock"></i> ${data.duration}</span>
       <span class="modal-tag"><i class="fas fa-graduation-cap"></i> ${data.target}</span>
-    <div class="ab-attribution" style="text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(128,128,128,0.25);font-size:0.8rem;opacity:0.65;">
-  <a href="https://www.linkedin.com/in/antonin-bareau/" target="_blank" rel="noopener" style="font-weight:bold;color:inherit;text-decoration:none;">Antonin Bareau</a>
-  &nbsp;&mdash;&nbsp;
-  <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">Licence CC BY-SA 4.0</a>
-</div>
 </div>
   `;
   document.getElementById('modal-content').innerHTML = content;
@@ -922,6 +906,5 @@ function formatMarkdown(text) {
     .replace(/\n/g, '<br>');
 }
 </script>
-
 </body>
 </html>
